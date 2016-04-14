@@ -17,6 +17,22 @@
 #define REQUEST_TIMEOUT 30*1000
 #define EXIT_TIMEOUT 3*1000
 
+void strreplace(char *,char,char);
+
+void strreplace(char s[], char chr, char repl_chr)
+{
+     int i=0;
+     while(s[i]!='\0')
+     {
+           if(s[i]==chr)
+           {
+               s[i]=repl_chr;
+           }  
+           i++; 
+     }
+          printf("%s",s);
+}
+
 static Window *s_main_window;
 static TextLayer *s_output_layer;
 
@@ -46,6 +62,7 @@ static void request_timeout() {
 }
 
 static void send_text(char *transcription) {
+  strreplace(transcription,' ','_');
   snprintf(s_last_text, sizeof(s_last_text), "sending\n%s", transcription);
   show_text(s_last_text, GColorFromHEX(0x44ff44), GColorFromHEX(0x000000));
 
